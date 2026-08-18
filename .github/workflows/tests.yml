@@ -8,6 +8,29 @@ on:
     types: [opened, reopened, review_requested]
 
 jobs:
+  expected-files-compile:
+    name: "Generated Results Compile"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./swagger_parser
+    strategy:
+      matrix:
+        sdk:
+          - stable
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: dart-lang/setup-dart@v1.7.2
+        with:
+          sdk: "${{ matrix.sdk }}"
+      - name: Install dependencies
+        run: dart pub get
+      - name: Run Test
+        run: |
+          dart test/e2e/e2e_validate_expected.dart \
+            test/e2e/tests/ \
+            test/e2e/validate_template \
+            {{ runner.temp }}/validate
   test:
     name: "Tests"
     runs-on: ubuntu-latest
