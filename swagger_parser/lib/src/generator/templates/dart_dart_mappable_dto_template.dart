@@ -486,12 +486,12 @@ FutureOr<List<Map<String, dynamic>>> serialize${className}List(List<$className>?
 }
 
 String _applySealedNaming(String name) {
-  if (name.endsWith('Sealed')) {
-    return name;
-  }
-  if (name.endsWith(_unionSuffix)) {
-    return '${name.substring(0, name.length - _unionSuffix.length)}Sealed';
-  }
+  // if (name.endsWith('Sealed')) {
+  //   return name;
+  // }
+  // if (name.endsWith(_unionSuffix)) {
+  //   return '${name.substring(0, name.length - _unionSuffix.length)}Sealed';
+  // }
   return name;
 }
 
