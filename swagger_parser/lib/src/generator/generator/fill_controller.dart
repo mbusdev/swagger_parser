@@ -62,16 +62,16 @@ final class FillController {
   }
 
   String _applySealedNaming(String name) {
-    const unionSuffix = 'Union';
-    const sealedSuffix = 'Sealed';
+    // const unionSuffix = 'Union';
+    // const sealedSuffix = 'Sealed';
 
-    if (name.endsWith(sealedSuffix)) {
-      return name;
-    }
+    // if (name.endsWith(sealedSuffix)) {
+    //   return name;
+    // }
 
-    if (name.endsWith(unionSuffix)) {
-      return '${name.substring(0, name.length - unionSuffix.length)}$sealedSuffix';
-    }
+    // if (name.endsWith(unionSuffix)) {
+    //   return '${name.substring(0, name.length - unionSuffix.length)}$sealedSuffix';
+    // }
 
     return name;
   }
