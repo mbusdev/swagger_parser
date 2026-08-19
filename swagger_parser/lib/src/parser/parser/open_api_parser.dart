@@ -2246,7 +2246,9 @@ class OpenApiParser {
       return null;
     }
 
-    final baseClassName = '$schemaName Union'.toPascal;
+    // final baseClassName = '$schemaName Union'.toPascal;
+    // attempts to reference the schema don't add this suffix causing issues
+    final baseClassName = schemaName;
     final (newName, description) = protectName(
       baseClassName,
       uniqueIfNull: true,

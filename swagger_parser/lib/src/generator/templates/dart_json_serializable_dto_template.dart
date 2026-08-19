@@ -475,13 +475,24 @@ String _defaultValue(UniversalType t) => t.defaultValue != null
 ///
 /// We MUST include interface model imports (e.g., `Cat`, `Dog`, `Human`) so
 /// that `implements <Interface>` resolves. Only exclude imports that are
-/// union files themselves to avoid circular dependencies.
+/// unused union files to avoid circular dependencies.
 Set<String> _filterUnionImports(UniversalComponentClass dataClass) {
+  final referencedTypes = <String>{}
+    ..addAll((dataClass.undiscriminatedUnionVariants ?? {})
+        .values
+        .expand((x) => x)
+        .map((prop) => prop.type))
+    ..addAll((dataClass.discriminator?.refProperties ?? {})
+        .values
+        .expand((x) => x)
+        .map((prop) => prop.type));
+
   final filteredImports = <String>{};
 
   for (final import in dataClass.imports) {
     // Exclude union files to avoid circular dependencies
-    final shouldSkip = import.toLowerCase().contains('union');
+    final shouldSkip = import.toLowerCase().contains('union') &&
+        !referencedTypes.contains(import);
 
     if (!shouldSkip) {
       filteredImports.add(import);
