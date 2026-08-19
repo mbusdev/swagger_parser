@@ -578,31 +578,32 @@ FutureOr<List<Map<String, dynamic>>> serialize${className}List(List<$className>?
 }
 
 String _applySealedNaming(String name) {
-  if (name.endsWith('Sealed')) {
-    return name;
-  }
-  if (name.endsWith(_unionSuffix)) {
-    return '${name.substring(0, name.length - _unionSuffix.length)}Sealed';
-  }
+  // if (name.endsWith('Sealed')) {
+  //   return name;
+  // }
+  // if (name.endsWith(_unionSuffix)) {
+  //   return '${name.substring(0, name.length - _unionSuffix.length)}Sealed';
+  // }
   return name;
 }
 
 String _applySealedNamingToImport(String import) {
-  if (import.endsWith(_unionSuffix)) {
-    return _applySealedNaming(import);
-  }
-  if (import.endsWith(_snakeUnionSuffix)) {
-    return '${import.substring(0, import.length - _snakeUnionSuffix.length)}_sealed';
-  }
+  // if (import.endsWith(_unionSuffix)) {
+  //   return _applySealedNaming(import);
+  // }
+  // if (import.endsWith(_snakeUnionSuffix)) {
+  //   return '${import.substring(0, import.length - _snakeUnionSuffix.length)}_sealed';
+  // }
   return import;
 }
 
-String _renameUnionTypes(String type) => type.replaceAllMapped(
-      RegExp(r'([A-Z][A-Za-z0-9_]*)Union\b'),
-      (match) => '${match.group(1)}Sealed',
-    );
+String _renameUnionTypes(String type) => type;
+// type.replaceAllMapped(
+//       RegExp(r'([A-Z][A-Za-z0-9_]*)Union\b'),
+//       (match) => '${match.group(1)}Sealed',
+//     );
 
 String _deserializerExtensionName(String className) =>
-    className.endsWith('Sealed')
+    className.endsWith('Sealed') || true
         ? '${className}Deserializer'
         : '${className}SealedDeserializer';
