@@ -27,10 +27,12 @@ jobs:
         run: dart pub get
       - name: Run Test
         run: |
+          mkdir ${{ runner.temp }}/validate
           dart test/e2e/e2e_validate_expected.dart \
+            . \
             test/e2e/tests/ \
             test/e2e/validate_template \
-            {{ runner.temp }}/validate
+            ${{ runner.temp }}/validate
   test:
     name: "Tests"
     runs-on: ubuntu-latest
