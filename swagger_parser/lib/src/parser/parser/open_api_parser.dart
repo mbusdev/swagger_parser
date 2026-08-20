@@ -1660,7 +1660,8 @@ class OpenApiParser {
 
           // Create a base union class for the discriminated types
           final baseClassName =
-              '${additionalName ?? ''} ${name ?? ''} Union'.toPascal;
+              // '${additionalName ?? ''} ${name ?? ''} Union'.toPascal;
+              '${additionalName ?? ''} ${name ?? ''}'.toPascal;
           final (newName, _) = protectName(
             baseClassName,
             uniqueIfNull: true,
@@ -1873,7 +1874,7 @@ class OpenApiParser {
 
               if (areAllRefsOrObjects && isUnion) {
                 final baseClassName =
-                    '${additionalName ?? ''} ${name ?? ''} Union'.toPascal;
+                    '${additionalName ?? ''} ${name ?? ''}'.toPascal;//' Union'.toPascal;
                 final (newName, description) = protectName(
                   baseClassName,
                   uniqueIfNull: true,

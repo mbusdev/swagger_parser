@@ -335,19 +335,19 @@ const _unionSuffix = 'Union';
 const _snakeUnionSuffix = '_union';
 
 String _applySealedNamingToImport(String import) {
-  if (import.endsWith(_unionSuffix)) {
-    return '${import.substring(0, import.length - _unionSuffix.length)}Sealed';
-  }
-  if (import.endsWith(_snakeUnionSuffix)) {
-    return '${import.substring(0, import.length - _snakeUnionSuffix.length)}_sealed';
-  }
+  // if (import.endsWith(_unionSuffix)) {
+  //   return '${import.substring(0, import.length - _unionSuffix.length)}Sealed';
+  // }
+  // if (import.endsWith(_snakeUnionSuffix)) {
+  //   return '${import.substring(0, import.length - _snakeUnionSuffix.length)}_sealed';
+  // }
   return import;
 }
 
-String _renameUnionTypes(String type) => type.replaceAllMapped(
-      RegExp(r'([A-Z][A-Za-z0-9_]*)Union\b'),
-      (match) => '${match.group(1)}Sealed',
-    );
+String _renameUnionTypes(String type) => type; //type.replaceAllMapped(
+    //   RegExp(r'([A-Z][A-Za-z0-9_]*)Union\b'),
+    //   (match) => '${match.group(1)}Sealed',
+    // );
 
 bool _hasBinaryResponse(UniversalRequest request) {
   return request.returnType?.format == 'binary' ||
