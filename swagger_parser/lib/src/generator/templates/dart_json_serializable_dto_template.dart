@@ -303,10 +303,15 @@ String _generateDiscriminatedWrapperClasses(
         discriminator.refProperties[variantName] ?? <UniversalType>{};
 
     // Generate direct properties
-    final directProperties = properties
-        .map((prop) =>
-            '  @override\n  final ${_renameUnionTypes(prop.toSuitableType(ProgrammingLanguage.dart, useMultipartFile: useMultipartFile))} ${prop.name};')
-        .join('\n');
+    final directProperties = properties.map((prop) {
+      final propType = _renameUnionTypes(prop.toSuitableType(
+          ProgrammingLanguage.dart,
+          useMultipartFile: useMultipartFile));
+      return ''
+          '  @override\n'
+          '${_jsonKey(prop, true)}'
+          '  final $propType ${prop.name};';
+    }).join('\n');
 
     // Generate constructor parameters
     final constructorParams =
@@ -348,10 +353,15 @@ String _generateUndiscriminatedWrapperClasses(
     final wrapperClassName = '$className${variantName.toPascal}';
 
     // Generate direct properties
-    final directProperties = properties
-        .map((prop) =>
-            '  @override\n  final ${_renameUnionTypes(prop.toSuitableType(ProgrammingLanguage.dart, useMultipartFile: useMultipartFile))} ${prop.name};')
-        .join('\n');
+    final directProperties = properties.map((prop) {
+      final propType = _renameUnionTypes(prop.toSuitableType(
+          ProgrammingLanguage.dart,
+          useMultipartFile: useMultipartFile));
+      return ''
+          '  @override\n'
+          '${_jsonKey(prop, true)}'
+          '  final $propType ${prop.name};';
+    }).join('\n');
 
     // Generate constructor parameters
     final constructorParams =
